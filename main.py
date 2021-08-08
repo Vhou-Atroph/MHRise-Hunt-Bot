@@ -1,6 +1,6 @@
-from datetime import datetime, timedelta
 import random
 import tweepy
+import schedule 
 
 # Authenticate to Twitter
 auth = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
@@ -99,5 +99,16 @@ def hunt():
     twt2.write(line1+line2)
     twt2.close()
     
-hunt()
+    #Post the tweet
+    twt1=open("txt/lasthunt1.txt","r")
+    monDeclaration=api.update_status(twt1.read())
+    twt1.close()
+    twt2=open("txt/lasthunt2.txt","r")
+    gearRecs=api.update_status(twt2.read(),in_reply_to_status_id=monDeclaration.id,auto_populate_reply_metadata=True)
+    twt2.close()
 
+#Every 30 minutes 
+schedule.every(30).minutes.do(hunt)  
+
+while True:  
+    schedule.run_pending()  
