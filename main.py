@@ -21,8 +21,11 @@ def wepAndBud():
     buddies=['no buddy','a palico','a palamute']
     wep=random.choice(weapons)
     bud=random.choice(buddies)
+    bud2='no buddy'
+    if hunters==1 and bud!='no buddy':
+        bud2=random.choice(buddies)
     global hunterChoices
-    hunterChoices=[wep,bud]
+    hunterChoices=[wep,bud,bud2]
 
 def hunt():
     huntTypes=['Low Rank','High Rank']
@@ -35,12 +38,16 @@ def hunt():
     monster=random.choice(monsterPool)
     print("The monster hunted will be:",monster)
     
+    global hunters
     hunters=random.randint(1,4)
     print("There will be",hunters,"players on the hunt.")
     if hunters==1:
         wepAndBud()
         p1=hunterChoices
-        print("The lone hunter will be using a",p1[0],"and bring",p1[1])
+        if p1[2]=='no buddy':
+            print("The lone hunter will be using a",p1[0],"and bring",p1[1])
+        else:
+            print("The lone hunter will be using a",p1[0],"and bring",p1[1],"and",p1[2])
     if hunters==2:
         wepAndBud()
         p1=hunterChoices
@@ -72,7 +79,7 @@ def hunt():
     twt1=open("txt/lasthunt1.txt","w",encoding="utf-8") #First tweet
     actions=["causing a disaster!","being a nuisance!","that looked at me wrong.","cyberbullying me!","that I want dead.","that would make a cool pet!","that I want to wear.","out there!","being mean to the Kelbi!"]
     action=random.choice(actions)
-    line1="There's a "+rank+" "+monster+" "+action+"\n" #Commas weren't working 🙃
+    line1="There's a "+rank+" "+monster+" "+action+"\n" #Commas weren't working
     canDoIts=["can take care of it!","can take care of it.","should be able to handle it!","should be enough!","would suffice.","would be sufficient."]
     canDoIt=random.choice(canDoIts)
     if hunters==1:
@@ -87,7 +94,10 @@ def hunt():
     twt2=open("txt/lasthunt2.txt","w",encoding="utf-8") #Second tweet, a reply to the first tweet
     line1="If you want my recommendations on what to bring:\n"
     if hunters==1:
-        line2="Hunter 1 should bring "+p1[0]+" and "+p1[1]
+        if p1[2]=='no buddy':
+            line2="Hunter 1 should bring "+p1[0]+" and "+p1[1]
+        else:
+            line2="Hunter 1 should bring "+p1[0]+", "+p1[1]+", and "+p1[2]
     if hunters==2:
         line2="Hunter 1 should bring "+p1[0]+" and "+p1[1]+"\nHunter 2 should bring "+p2[0]+" and "+p2[1]
     if hunters==3:
@@ -111,4 +121,4 @@ def hunt():
 schedule.every(30).minutes.do(hunt)  
 
 while True:  
-    schedule.run_pending()  
+    schedule.run_pending()
