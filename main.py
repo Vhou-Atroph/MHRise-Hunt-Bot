@@ -99,22 +99,5 @@ def hunt():
     twt2.write(line1+line2)
     twt2.close()
     
-    '''#Post the tweet
-    twt1=open("txt/lasthunt1.txt","r")
-    monDeclaration=api.update_status(twt1.read())
-    twt1.close()
-    twt2=open("txt/lasthunt2.txt","r")
-    gearRecs=api.update_status(twt2.read(),in_reply_to_status_id=monDeclaration.id,auto_populate_reply_metadata=True)
-    twt2.close()'''
-    
 hunt()
 
-'''while 1:
-    print("Generating a hunt!")
-    hunt()
-
-    dt = datetime.now() + timedelta(hours=1)
-    dt = dt.replace(minute=30)
-
-    while datetime.now() < dt:
-        time.sleep(1)'''
