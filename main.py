@@ -77,7 +77,7 @@ def hunt():
     
     #Tweet writing
     twt1=open("txt/lasthunt1.txt","w",encoding="utf-8") #First tweet
-    actions=["causing a disaster!","being a nuisance!","that looked at me wrong.","cyberbullying me!","that I want dead.","that would make a cool pet!","that I want to wear.","out there!","being mean to the Kelbi!"]
+    actions=["causing a disaster!","being a nuisance!","that looked at me wrong.","cyberbullying me!","that I want dead.","that would make a cool pet!","that I want to wear.","out there!","being mean to the Kelbi!","outside my shop!"]
     action=random.choice(actions)
     line1="There's a "+rank+" "+monster+" "+action+"\n" #Commas weren't working
     canDoIts=["can take care of it!","can take care of it.","should be able to handle it!","should be enough!","would suffice.","would be sufficient."]
